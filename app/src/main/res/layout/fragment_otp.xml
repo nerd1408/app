@@ -1,0 +1,51 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="false"
+    android:background="@color/colorPrimary"
+    android:padding="@dimen/padding_common">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/snackbar_container"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="-100dp"
+        android:layout_alignBottom="@+id/tv_private_policy"
+        android:layout_height="match_parent" />
+
+    <com.witvpn.ikev2.presentation.widget.AuthToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:atb_left="@drawable/ic_delete"
+        app:atb_title="@string/get_started" />
+
+    <com.witvpn.ikev2.presentation.widget.InputView
+        android:id="@+id/input_address"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_input_view"
+        android:layout_below="@+id/toolbar"
+        android:layout_marginTop="22dp"
+        android:inputType="textEmailAddress"
+        app:iv_action="CANCEL"
+        app:iv_hint="@string/hint_email_address"
+        app:iv_label="@string/email_address" />
+
+    <TextView
+        android:id="@+id/tv_private_policy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/input_address"
+        android:layout_marginTop="23dp"
+        android:fontFamily="@font/campton_book"
+        android:text="@string/message_agree"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tvBottomAction"
+        style="@style/ActionButton.State"
+        android:layout_width="match_parent"
+        android:textColor="#ffffff"
+        android:layout_alignParentBottom="true"
+        android:text="@string/login" />
+</RelativeLayout>

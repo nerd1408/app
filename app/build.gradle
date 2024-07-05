@@ -1,0 +1,113 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+    id 'androidx.navigation.safeargs.kotlin'
+}
+
+android {
+    compileSdkVersion 32
+
+    defaultConfig {
+        applicationId "app.witwork.strongikev2"
+        minSdkVersion 26
+        targetSdkVersion 32
+        versionCode 8
+        versionName "1.0.8"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        resValue("string", "ADMOB_ID", "ca-app-pub-3940256099942544/6300978111")
+        resValue("string", "base_url", "http://45.159.222.51:3002/strongvpn/api/")
+    }
+
+    signingConfigs {
+        release {
+            keyAlias 'strongvpn'
+            keyPassword 'android'
+            storeFile file('KEY_STORE/strongikev2.jks')
+            storePassword 'android'
+        }
+    }
+
+    bundle {
+        language {
+            enableSplit = false
+        }
+        density {
+            enableSplit = false
+        }
+        abi {
+            enableSplit = false
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+
+    sourceSets {
+        main.res.srcDirs = ['src/main/res', 'src/main/resFlags', 'src/main/resIKEV2']
+    }
+}
+
+ext.billing_version = "4.0.0"
+
+dependencies {
+    implementation project(path: ':core-networking')
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    //noinspection GradleDependency
+    implementation 'androidx.core:core-ktx:1.8.0'
+    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'com.google.android.material:material:1.6.1'
+    implementation 'androidx.preference:preference-ktx:1.2.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
+    //#Navigation
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.1'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.5.1'
+
+    //#LiveData
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1"
+    implementation "androidx.lifecycle:lifecycle-common-java8:2.5.1"
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
+
+    //#Hilt
+    implementation 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03'
+    implementation 'com.google.dagger:hilt-android:2.41'
+    kapt 'androidx.hilt:hilt-compiler:1.0.0'
+    kapt 'com.google.dagger:hilt-android-compiler:2.40.5'
+
+    //#Ads
+    implementation 'com.google.android.gms:play-services-ads:21.2.0'
+
+    //#Common
+    implementation 'com.jakewharton.timber:timber:4.7.1'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    implementation 'com.airbnb.android:lottie:3.6.0'
+
+    //#Billing
+    //noinspection GradleDependency
+    implementation "com.android.billingclient:billing-ktx:$billing_version"
+
+
+}
